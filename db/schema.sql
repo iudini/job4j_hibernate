@@ -1,0 +1,9 @@
+CREATE TABLE model (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+CREATE TABLE mark (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
