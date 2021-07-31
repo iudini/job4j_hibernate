@@ -8,8 +8,8 @@ import java.util.Objects;
 public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String name;
+    private int id;
+    private String name;
 
     public static Model of(String name) {
         Model model = new Model();

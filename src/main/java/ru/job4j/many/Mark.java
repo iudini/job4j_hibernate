@@ -10,11 +10,11 @@ import java.util.Objects;
 public class Mark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
-    String name;
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Model> models = new ArrayList<>();
+    private List<Model> models = new ArrayList<>();
 
     public static Mark of(String name) {
         Mark mark = new Mark();
