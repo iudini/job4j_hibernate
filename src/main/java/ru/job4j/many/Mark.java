@@ -13,7 +13,8 @@ public class Mark {
     private int id;
 
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "mark")
     private List<Model> models = new ArrayList<>();
 
     public static Mark of(String name) {
@@ -42,6 +43,14 @@ public class Mark {
         this.models.add(model);
     }
 
+    public List<Model> getModels() {
+        return models;
+    }
+
+    public void setModels(List<Model> models) {
+        this.models = models;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,5 +62,13 @@ public class Mark {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Mark{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

@@ -1,24 +1,25 @@
-package ru.job4j.many;
+package ru.job4j.lazy;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "model")
-public class Model {
+@Table(name = "categories")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    @ManyToOne
-    @JoinColumn(name = "mark_id")
-    private Mark mark;
 
-    public static Model of(String name, Mark mark) {
-        Model model = new Model();
-        model.name = name;
-        model.mark = mark;
-        return model;
+    private String name;
+    @OneToMany(mappedBy = "category")
+    private List<Task> tasks = new ArrayList<>();
+
+    public static Category of(String name) {
+        Category category = new Category();
+        category.name = name;
+        return category;
     }
 
     public int getId() {
@@ -37,20 +38,20 @@ public class Model {
         this.name = name;
     }
 
-    public Mark getMark() {
-        return mark;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    public void setMark(Mark mark) {
-        this.mark = mark;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Model model = (Model) o;
-        return id == model.id;
+        Category category = (Category) o;
+        return id == category.id;
     }
 
     @Override
@@ -60,10 +61,9 @@ public class Model {
 
     @Override
     public String toString() {
-        return "Model{" +
+        return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", mark=" + mark +
                 '}';
     }
 }
